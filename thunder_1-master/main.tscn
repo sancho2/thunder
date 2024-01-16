@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmp0x4hs3kpo"]
+
+[ext_resource type="PackedScene" uid="uid://c0emyun0yr0ox" path="res://player.tscn" id="1_crinu"]
+[ext_resource type="Script" path="res://main.gd" id="1_m30fj"]
+[ext_resource type="PackedScene" uid="uid://b3lj5ysmldv17" path="res://enemy.tscn" id="2_7ybt6"]
+[ext_resource type="PackedScene" uid="uid://og1sw68y7n8t" path="res://heart_bar.tscn" id="3_d587r"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_m30fj")
+
+[node name="Player" parent="." instance=ExtResource("1_crinu")]
+position = Vector2(242, 519)
+scale = Vector2(0.5, 0.5)
+
+[node name="Enemy" parent="." instance=ExtResource("2_7ybt6")]
+position = Vector2(87, 241)
+
+[node name="HeartBar" parent="." instance=ExtResource("3_d587r")]
+offset_left = 19.0
+offset_top = 11.0
+offset_right = 304.0
+offset_bottom = 56.0
+
+[node name="Button" type="Button" parent="."]
+offset_left = 273.0
+offset_top = 20.0
+offset_right = 384.0
+offset_bottom = 116.0
+text = "Go"
+
+[connection signal="bullet_hit_player" from="Enemy" to="." method="_on_enemy_bullet_hit_player"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

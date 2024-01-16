@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3lj5ysmldv17"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_187oa"]
+[ext_resource type="Texture2D" uid="uid://dolaym7jefuqc" path="res://assets/enemy.png" id="1_qag8h"]
+[ext_resource type="PackedScene" uid="uid://c67thyyygunly" path="res://bullet.tscn" id="2_6sf34"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h77qa"]
+size = Vector2(72, 73)
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_187oa")
+Bullet = ExtResource("2_6sf34")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -3.14159
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_qag8h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_h77qa")
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(0, 40)
+rotation = 1.5708
+
+[node name="FiringFreq" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="FiringFreq" to="." method="_on_firing_freq_timeout"]
